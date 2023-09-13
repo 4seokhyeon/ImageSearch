@@ -1,4 +1,4 @@
-package com.example
+package com.ImageSearch
 
 import android.app.Application
 import timber.log.Timber

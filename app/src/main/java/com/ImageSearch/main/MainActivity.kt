@@ -1,8 +1,9 @@
-package com.example
+package com.ImageSearch.main
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.example.databinding.ActivityMainBinding
+import timber.log.Timber
 
 class MainActivity : AppCompatActivity() {
     lateinit var binding:ActivityMainBinding
@@ -10,5 +11,6 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
     }
 }
