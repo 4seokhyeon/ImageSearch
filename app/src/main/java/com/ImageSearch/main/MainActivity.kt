@@ -1,10 +1,11 @@
 package com.ImageSearch.main
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.GridLayoutManager
 import com.example.databinding.ActivityMainBinding
 import com.google.android.material.tabs.TabLayoutMediator
-import timber.log.Timber
+
 
 class MainActivity : AppCompatActivity() {
     lateinit var binding:ActivityMainBinding
@@ -16,6 +17,10 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         initView()
+    }
+
+    private fun adapterReasource(){
+
     }
 
     private fun initView() = with(binding) {

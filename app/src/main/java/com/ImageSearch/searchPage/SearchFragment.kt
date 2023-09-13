@@ -17,9 +17,8 @@ class SearchFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
 
-      binding =  FragmentSearchBinding.inflate(inflater, container,false)
+        binding =  FragmentSearchBinding.inflate(inflater, container,false)
         return binding.root
-
 
     }
 

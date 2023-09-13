@@ -16,7 +16,7 @@ class BoxFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-      binding = FragmentBoxBinding.inflate(inflater,container,false)
+        binding = FragmentBoxBinding.inflate(inflater,container,false)
         return binding.root
     }
 
