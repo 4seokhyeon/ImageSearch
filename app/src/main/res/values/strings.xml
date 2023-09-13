@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">ImageSearch</string>
-    <string name="tab_contactlist">연락처</string>
-    <string name="tab_mypage">내정보</string>
+    <string name="tab_contactlist">검색결과</string>
+    <string name="tab_mypage">내 보관함</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

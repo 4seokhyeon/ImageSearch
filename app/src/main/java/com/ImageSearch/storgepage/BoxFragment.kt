@@ -10,7 +10,7 @@ import com.example.databinding.FragmentBoxBinding
 
 
 class BoxFragment : Fragment() {
-    lateinit var binding:FragmentBoxBinding
+   lateinit var binding: FragmentBoxBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
