@@ -7,5 +7,5 @@ data class ImageSearchResponse(
     val metaDate:MetaData?,
 
     @SerializedName("documents")
-    var documents: MutableList<ImageItem>?
+    var documents: MutableList<Item>?
 )

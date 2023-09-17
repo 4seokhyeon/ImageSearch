@@ -1,4 +1,4 @@
-package com.ImageSearch.util
+package com.ImageSearch.model
 
 
 class Constants {

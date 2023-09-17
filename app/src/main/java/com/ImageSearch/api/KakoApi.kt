@@ -1,7 +1,7 @@
 package com.ImageSearch.api
 
 import com.ImageSearch.model.ImageSearchResponse
-import com.ImageSearch.util.Constants
+import com.ImageSearch.model.Constants
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Header

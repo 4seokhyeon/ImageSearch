@@ -1,6 +1,6 @@
 package com.ImageSearch.api
 
-import com.ImageSearch.util.Constants.Companion.BASE_URL
+import com.ImageSearch.model.Constants.Companion.BASE_URL
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 

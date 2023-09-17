@@ -58,9 +58,14 @@ dependencies {
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.4.2'
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.4.1'
 
+    implementation "androidx.fragment:fragment-ktx:1.6.1" // 버전은 최신 버전으로 업데이트하세요
+
+
     // ViewModel
     implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.2'
 
+    implementation 'com.github.bumptech.glide:glide:4.12.0'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.12.0'
 
     implementation "com.jakewharton.timber:timber:4.7.1"
 }
