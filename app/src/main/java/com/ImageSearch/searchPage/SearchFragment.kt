@@ -9,8 +9,10 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.room.util.query
 import com.ImageSearch.viewmodel.MainViewModel
 import com.example.databinding.FragmentSearchBinding
+import timber.log.Timber
 
 
 class SearchFragment : Fragment() {
@@ -45,6 +47,7 @@ class SearchFragment : Fragment() {
         binding.searchBtn.setOnClickListener {
             val query = binding.dialogName.text.toString()
             if(query.isNotEmpty()){
+                viewModel.query = query
                 viewModel.reloadItems(query)
             }
         }
