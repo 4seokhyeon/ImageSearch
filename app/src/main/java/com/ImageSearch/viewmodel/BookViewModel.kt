@@ -5,16 +5,16 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.ImageSearch.model.Item
 
-class BookViewModel: ViewModel() {
+class BookViewModel : ViewModel() {
     private val bookItems: MutableLiveData<MutableList<Item>> = MutableLiveData(mutableListOf())
 
-    val bookItem : LiveData<MutableList<Item>> = bookItems
+    val bookItem: LiveData<MutableList<Item>> = bookItems
 
     fun addToBookmark(item: Item) {
         val items = bookItems.value ?: mutableListOf()
         if (!items.contains(item)) {
             items.add(item)
-            bookItems.postValue(items)
+            bookItems.value = items
         }
     }
 
@@ -22,8 +22,7 @@ class BookViewModel: ViewModel() {
         val items = bookItems.value ?: mutableListOf()
         if (items.contains(item)) {
             items.remove(item)
-            bookItems.postValue(items)
+            bookItems.value = items
         }
     }
-
 }

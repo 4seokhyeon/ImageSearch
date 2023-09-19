@@ -6,10 +6,14 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.ImageSearch.model.Item
+import com.ImageSearch.viewmodel.BookViewModel
+import com.ImageSearch.viewmodel.LikeViewModel
 import com.bumptech.glide.Glide
+import com.example.R
 import com.example.databinding.ItemSearchBinding
+import timber.log.Timber
 
-class SearchAdapter : ListAdapter<Item, SearchAdapter.SearchHolder>(ItemDiffCallback()) {
+class SearchAdapter(private val viewModel: BookViewModel,private val likeViewModel: LikeViewModel) : ListAdapter<Item, SearchAdapter.SearchHolder>(ItemDiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SearchHolder {
         val binding = ItemSearchBinding.inflate(LayoutInflater.from(parent.context), parent, false)
@@ -20,7 +24,7 @@ class SearchAdapter : ListAdapter<Item, SearchAdapter.SearchHolder>(ItemDiffCall
         holder.bind(getItem(position))
     }
 
-    class SearchHolder(val binding: ItemSearchBinding) : RecyclerView.ViewHolder(binding.root) {
+    inner class SearchHolder(val binding: ItemSearchBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(item: Item) {
             binding.apply {
                 textListTitle.text = item.display_sitename
@@ -28,17 +32,42 @@ class SearchAdapter : ListAdapter<Item, SearchAdapter.SearchHolder>(ItemDiffCall
                 Glide.with(itemView.context)
                     .load(item.image_url)
                     .into(imageView)
+
+                likeBtn.setOnClickListener {
+                    Timber.e("클릭도미")
+                    // 아이템의 좋아요 상태 토글
+                    val liked = !item.like
+                    if (liked) {
+                        likeBtn.setImageResource(R.drawable.icon_fill_like)
+                        likeViewModel.addToLikedItems(item)
+                    } else {
+                        likeBtn.setImageResource(R.drawable.icon_size)
+                        likeViewModel.removeFromLikedItems(item)
+                    }
+                    item.like = liked // 아이템의 좋아요 상태 변경
+
+                    
+                }
+
+                // 아이템의 좋아요 상태에 따라 버튼 UI 업데이트
+                if (item.like) {
+                    likeBtn.setImageResource(R.drawable.icon_fill_like)
+                } else {
+                    likeBtn.setImageResource(R.drawable.icon_size)
+                }
             }
         }
-    }
-}
 
-class ItemDiffCallback : DiffUtil.ItemCallback<Item>() {
-    override fun areItemsTheSame(oldItem: Item, newItem: Item): Boolean {
-        return oldItem.image_url == newItem.image_url
     }
 
-    override fun areContentsTheSame(oldItem: Item, newItem: Item): Boolean {
-        return oldItem == newItem
+
+    class ItemDiffCallback : DiffUtil.ItemCallback<Item>() {
+        override fun areItemsTheSame(oldItem: Item, newItem: Item): Boolean {
+            return oldItem.image_url == newItem.image_url
+        }
+
+        override fun areContentsTheSame(oldItem: Item, newItem: Item): Boolean {
+            return oldItem == newItem
+        }
     }
 }

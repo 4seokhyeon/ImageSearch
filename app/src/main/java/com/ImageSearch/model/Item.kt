@@ -8,5 +8,7 @@ data class Item(
     val thumbnailUrl: String,
     val image_url: String,
     val display_sitename: String,
-    val datetime: String
+    val datetime: String,
+
+    var like: Boolean = false
 )
