@@ -13,7 +13,7 @@ import com.example.R
 import com.example.databinding.ItemSearchBinding
 import timber.log.Timber
 
-class SearchAdapter(private val viewModel: BookViewModel,private val likeViewModel: LikeViewModel) : ListAdapter<Item, SearchAdapter.SearchHolder>(ItemDiffCallback()) {
+class SearchAdapter(private val likeViewModel: LikeViewModel) : ListAdapter<Item, SearchAdapter.SearchHolder>(ItemDiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SearchHolder {
         val binding = ItemSearchBinding.inflate(LayoutInflater.from(parent.context), parent, false)
@@ -22,6 +22,7 @@ class SearchAdapter(private val viewModel: BookViewModel,private val likeViewMod
 
     override fun onBindViewHolder(holder: SearchHolder, position: Int) {
         holder.bind(getItem(position))
+        Timber.e("데이터 ${getItem(position)}")
     }
 
     inner class SearchHolder(val binding: ItemSearchBinding) : RecyclerView.ViewHolder(binding.root) {
@@ -34,19 +35,26 @@ class SearchAdapter(private val viewModel: BookViewModel,private val likeViewMod
                     .into(imageView)
 
                 likeBtn.setOnClickListener {
-                    Timber.e("클릭도미")
+
                     // 아이템의 좋아요 상태 토글
                     val liked = !item.like
+                    item.like = liked
                     if (liked) {
                         likeBtn.setImageResource(R.drawable.icon_fill_like)
                         likeViewModel.addToLikedItems(item)
+                        likeViewModel.onLikedItemClicked(item)
+                        Timber.e("데이터 $likeViewModel")
+                        Timber.e("데이터 $item")
+
                     } else {
                         likeBtn.setImageResource(R.drawable.icon_size)
                         likeViewModel.removeFromLikedItems(item)
-                    }
-                    item.like = liked // 아이템의 좋아요 상태 변경
 
-                    
+                    }
+                    Timber.e("클릭도미 ${item.image_url},${item.like}")
+
+
+
                 }
 
                 // 아이템의 좋아요 상태에 따라 버튼 UI 업데이트

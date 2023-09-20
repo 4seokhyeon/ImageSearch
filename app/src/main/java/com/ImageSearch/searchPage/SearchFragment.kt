@@ -26,7 +26,7 @@ class SearchFragment : Fragment() {
     private val viewModel: MainViewModel by viewModels()
     private lateinit var adapter: SearchAdapter
     private val _viewModel: BookViewModel by viewModels()
-    private val likeViewModel:LikeViewModel by viewModels()
+    private val likeViewModel:LikeViewModel by activityViewModels()
 
 
 
@@ -42,15 +42,15 @@ class SearchFragment : Fragment() {
         recyclerView.layoutManager = GridLayoutManager(requireContext(), 2)
 
         // 어댑터 초기화
-        adapter = SearchAdapter(_viewModel,likeViewModel)
+        adapter = SearchAdapter(likeViewModel)
 
 
         // RecyclerView에 어댑터 설정
         recyclerView.adapter = adapter
 
-
         // 뷰모델의 LiveData를 관찰하여 데이터가 변경될 때 어댑터를 업데이트
         viewModel.itemsLiveData.observe(viewLifecycleOwner, Observer { items ->
+            Timber.e("라이브 데이터 $items")
             // 데이터가 변경되었을 때 어댑터에 새로운 데이터 설정
             adapter.submitList(items)
         })
@@ -63,11 +63,8 @@ class SearchFragment : Fragment() {
             }
         }
 
-
-
         return binding.root
     }
-
     companion object {
         fun newInstacne() = SearchFragment()
     }

@@ -7,51 +7,40 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.ImageSearch.viewmodel.BookViewModel
+import com.ImageSearch.searchPage.BookAdapter
 import com.ImageSearch.viewmodel.LikeViewModel
-import com.ImageSearch.viewmodel.MainViewModel
 import com.example.databinding.FragmentBoxBinding
 import timber.log.Timber
 
 
 class BoxFragment : Fragment() {
-    private val _viewModel: BookViewModel by viewModels()
-    private val viewModel:MainViewModel by viewModels()
-    private val likeViewModel:LikeViewModel by viewModels()
     lateinit var binding: FragmentBoxBinding
-    private var like = Boolean
     private lateinit var recyclerView: RecyclerView
     private lateinit var adapter: BookAdapter
-
+    private val likeViewModel: LikeViewModel by activityViewModels()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = FragmentBoxBinding.inflate(inflater,container,false)
-
-        recyclerView= binding.bookCyclerview
-        recyclerView.layoutManager = GridLayoutManager(requireContext(),2)
-        Timber.e("리사이클러뷰 되는중 $recyclerView")
+        binding = FragmentBoxBinding.inflate(inflater, container, false)
 
         adapter = BookAdapter(likeViewModel)
-        Timber.e("어댑터 연결됨 $_viewModel")
+        binding.bookCyclerview.adapter = adapter
+        binding.bookCyclerview.layoutManager = GridLayoutManager(context,2)
 
-        // RecyclerView에 어댑터 설정
-        recyclerView.adapter = adapter
+        likeViewModel.likedItems.observe(viewLifecycleOwner) {
+            it
+            Timber.e("여기는 데이터가 오 ㅐ 안들어오까..;. $it")
+            // 좋아요를 누른 항목을 사용하여 UI를 업데이트하십시오.
+            // 예: RecyclerView 어댑터에 데이터를 전달하여 좋아요를 누른 항목을 표시하십시오.
+            adapter.submitList(it)
 
-        val likedItems = likeViewModel.getLikedItems()
-        adapter.submitList(likedItems)
+            Timber.e("너가 범인? ${(it.toString())}")
 
-      likeViewModel.likedItems.observe(viewLifecycleOwner){ likeItems ->
-          adapter.submitList(likeItems)
-      }
-
-
-
+        }
 
         return binding.root
     }

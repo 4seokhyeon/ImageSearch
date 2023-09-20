@@ -12,7 +12,8 @@ class MainViewModel (private val repository: Repository) : ViewModel(){
     private val _rawItems = MutableLiveData<List<Item>?>() // 직접 초기화
 
     // 매핑된 LiveData를 반환하는 프로퍼티 정의
-    val itemsLiveData: MutableLiveData<List<Item>?> = _rawItems
+    val itemsLiveData: MutableLiveData<List<Item>?>
+        get() = _rawItems
     var currentPage: Int = 1
     var pageSize: Int = 10
     var query: String = ""

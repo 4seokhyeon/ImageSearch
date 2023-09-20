@@ -40,5 +40,15 @@
         app:layout_constraintEnd_toEndOf="@+id/book_image"
         app:layout_constraintStart_toStartOf="@+id/book_image"
         app:layout_constraintTop_toBottomOf="@+id/book_list" />
+    <ImageView
+        android:id="@+id/like_book_btn"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_marginStart="16dp"
+        android:clipToOutline="true"
+        android:background="@drawable/heart"
+        app:layout_constraintBottom_toBottomOf="@+id/book_list"
+        app:layout_constraintStart_toEndOf="@+id/book_list"
+        app:layout_constraintTop_toBottomOf="@+id/book_image" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
