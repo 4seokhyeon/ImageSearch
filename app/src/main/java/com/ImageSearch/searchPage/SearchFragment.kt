@@ -1,28 +1,19 @@
 package com.ImageSearch.searchPage
 
-import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
-import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
-import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
-import androidx.room.util.query
 import com.ImageSearch.model.Item
 import com.ImageSearch.model.SharedPreferencesUtil
-import com.ImageSearch.model.SharedPreferencesUtil.saveLikedItems
-import com.ImageSearch.viewmodel.BookViewModel
 import com.ImageSearch.viewmodel.LikeViewModel
 import com.ImageSearch.viewmodel.MainViewModel
-import com.example.R
 import com.example.databinding.FragmentSearchBinding
-import com.google.gson.Gson
-import com.google.gson.reflect.TypeToken
 import timber.log.Timber
 
 

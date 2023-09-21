@@ -6,7 +6,6 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.ImageSearch.model.Item
-import com.ImageSearch.viewmodel.BookViewModel
 import com.ImageSearch.viewmodel.LikeViewModel
 import com.bumptech.glide.Glide
 import com.example.R
