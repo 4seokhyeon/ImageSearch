@@ -33,9 +33,10 @@ object SharedPreferencesUtil {
 
         val gson = Gson()
         val likedItemsType = object : TypeToken<List<Item>>() {}.type
-        return gson.fromJson(likedItemsJson, likedItemsType)
+        val allLikedItems = gson.fromJson<List<Item>>(likedItemsJson, likedItemsType)
 
-        Timber.e("data load")
+        // 좋아요를 누른 항목만 필터링하여 반환
+        return allLikedItems.filter { it.like }
     }
 }
 
