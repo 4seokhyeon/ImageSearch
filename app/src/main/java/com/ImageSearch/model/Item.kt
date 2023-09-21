@@ -1,6 +1,9 @@
 package com.ImageSearch.model
 
+import android.content.Context
+import com.google.gson.Gson
 import com.google.gson.annotations.SerializedName
+import timber.log.Timber
 
 data class Item(
 

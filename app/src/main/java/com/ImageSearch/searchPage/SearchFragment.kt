@@ -1,5 +1,6 @@
 package com.ImageSearch.searchPage
 
+import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -13,11 +14,15 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import androidx.room.util.query
 import com.ImageSearch.model.Item
+import com.ImageSearch.model.SharedPreferencesUtil
+import com.ImageSearch.model.SharedPreferencesUtil.saveLikedItems
 import com.ImageSearch.viewmodel.BookViewModel
 import com.ImageSearch.viewmodel.LikeViewModel
 import com.ImageSearch.viewmodel.MainViewModel
 import com.example.R
 import com.example.databinding.FragmentSearchBinding
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
 import timber.log.Timber
 
 
@@ -40,20 +45,25 @@ class SearchFragment : Fragment() {
         recyclerView = binding.recyclerView
         recyclerView.layoutManager =
             StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
-
         // 어댑터 초기화
         adapter = SearchAdapter(likeViewModel)
-
-
         // RecyclerView에 어댑터 설정
         recyclerView.adapter = adapter
-
         // 뷰모델의 LiveData를 관찰하여 데이터가 변경될 때 어댑터를 업데이트
         viewModel.itemsLiveData.observe(viewLifecycleOwner, Observer { items ->
             Timber.e("라이브 데이터 $items")
             // 데이터가 변경되었을 때 어댑터에 새로운 데이터 설정
             adapter.submitList(items)
+            if (items != null) {
+                saveLikedItems(items)
+            }
         })
+  /*      val sharedPreferences = requireContext().getSharedPreferences("Prefernces",Context.MODE_PRIVATE)
+        val likedDateJson = sharedPreferences.getString("likeData","")
+        val gson = Gson()
+        val likedItemd:List<Item> = gson.fromJson(likedDateJson,object : TypeToken<List<Item>>() {}.type)
+        adapter.submitList(likedItemd)
+*/
 
         binding.searchBtn.setOnClickListener {
             val query = binding.dialogName.text.toString()
@@ -64,6 +74,11 @@ class SearchFragment : Fragment() {
         }
 
         return binding.root
+    }
+
+    private fun saveLikedItems(likedItems: List<Item>) {
+        // 좋아요한 아이템 목록을 저장
+        context?.let { SharedPreferencesUtil.saveLikedItems(likedItems, it) }
     }
 
     companion object {

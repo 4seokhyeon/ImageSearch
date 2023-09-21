@@ -34,6 +34,8 @@ class SearchAdapter(private val likeViewModel: LikeViewModel) : ListAdapter<Item
                     .load(item.image_url)
                     .into(imageView)
 
+
+
                 likeBtn.setOnClickListener {
 
                     // 아이템의 좋아요 상태 토글
@@ -78,4 +80,7 @@ class SearchAdapter(private val likeViewModel: LikeViewModel) : ListAdapter<Item
             return oldItem == newItem
         }
     }
+
+
+
 }

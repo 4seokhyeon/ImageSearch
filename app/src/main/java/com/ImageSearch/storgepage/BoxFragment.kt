@@ -11,6 +11,9 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
+import com.ImageSearch.model.Item
+import com.ImageSearch.model.SharedPreferencesUtil
+import com.ImageSearch.model.SharedPreferencesUtil.saveLikedItems
 import com.ImageSearch.searchPage.BookAdapter
 import com.ImageSearch.viewmodel.LikeViewModel
 import com.example.databinding.FragmentBoxBinding
@@ -36,13 +39,32 @@ class BoxFragment : Fragment() {
             it
             Timber.e("여기는 데이터가 오 ㅐ 안들어오까..;. $it")
             adapter.submitList(it)
-
+            saveLikedItems(it)
             Timber.e("너가 범인? ${(it.toString())}")
 
         }
 
+        val loadedItems = loadLikedItems()
+        adapter.submitList(loadedItems)
+
         return binding.root
     }
 
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+        val loadedItems = loadLikedItems()
+        adapter.submitList(loadedItems)
+    }
+
+    private fun saveLikedItems(likedItems: List<Item>) {
+        // 좋아요한 아이템 목록을 저장
+        context?.let { SharedPreferencesUtil.saveLikedItems(likedItems, it) }
+    }
+
+
+    private fun loadLikedItems(): List<Item> {
+        // 저장된 좋아요한 아이템 목록을 로드
+        return context?.let { SharedPreferencesUtil.loadLikedItems(it) } ?: emptyList()
+    }
 
 }

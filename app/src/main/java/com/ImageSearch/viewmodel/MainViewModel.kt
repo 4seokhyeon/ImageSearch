@@ -27,7 +27,7 @@ class MainViewModel (private val repository: Repository) : ViewModel(){
 
         viewModelScope.launch {
             try {
-                val response = repository.searchImage(query, "accuracy", currentPage, pageSize)
+                val response = repository.searchImage(query, "recency", currentPage, pageSize)
                 if (response.isSuccessful) {
                     val imageSearchResponse = response.body()
                     val newItems = imageSearchResponse?.documents ?: emptyList() // 새로운 데이터 가져오기
