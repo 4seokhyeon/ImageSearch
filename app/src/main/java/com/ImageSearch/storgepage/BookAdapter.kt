@@ -56,6 +56,7 @@ class BookAdapter(private val likeViewModel: LikeViewModel) :
                     }
                     Timber.e("클릭도미 ${item.image_url},${item.like}")
 
+                    notifyDataSetChanged()
 
                 }
 

@@ -52,7 +52,7 @@ class SearchAdapter(private val likeViewModel: LikeViewModel) : ListAdapter<Item
 
                     }
                     Timber.e("클릭도미 ${item.image_url},${item.like}")
-
+                    notifyDataSetChanged()
 
 
                 }

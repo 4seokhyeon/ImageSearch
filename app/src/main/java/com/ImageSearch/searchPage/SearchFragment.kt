@@ -10,6 +10,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import androidx.room.util.query
 import com.ImageSearch.model.Item
 import com.ImageSearch.viewmodel.BookViewModel
@@ -23,11 +24,9 @@ import timber.log.Timber
 class SearchFragment : Fragment() {
     private lateinit var binding: FragmentSearchBinding
     private lateinit var recyclerView: RecyclerView
-    private val viewModel: MainViewModel by viewModels()
+    private val viewModel: MainViewModel by activityViewModels()
     private lateinit var adapter: SearchAdapter
-    private val _viewModel: BookViewModel by viewModels()
-    private val likeViewModel:LikeViewModel by activityViewModels()
-
+    private val likeViewModel: LikeViewModel by activityViewModels()
 
 
     override fun onCreateView(
@@ -39,7 +38,8 @@ class SearchFragment : Fragment() {
 
         // RecyclerView 초기화
         recyclerView = binding.recyclerView
-        recyclerView.layoutManager = GridLayoutManager(requireContext(), 2)
+        recyclerView.layoutManager =
+            StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
 
         // 어댑터 초기화
         adapter = SearchAdapter(likeViewModel)
@@ -57,7 +57,7 @@ class SearchFragment : Fragment() {
 
         binding.searchBtn.setOnClickListener {
             val query = binding.dialogName.text.toString()
-            if(query.isNotEmpty()){
+            if (query.isNotEmpty()) {
                 viewModel.query = query
                 viewModel.reloadItems(query)
             }
@@ -65,6 +65,7 @@ class SearchFragment : Fragment() {
 
         return binding.root
     }
+
     companion object {
         fun newInstacne() = SearchFragment()
     }

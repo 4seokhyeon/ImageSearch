@@ -10,6 +10,7 @@ import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.ImageSearch.searchPage.BookAdapter
 import com.ImageSearch.viewmodel.LikeViewModel
 import com.example.databinding.FragmentBoxBinding
@@ -29,13 +30,11 @@ class BoxFragment : Fragment() {
 
         adapter = BookAdapter(likeViewModel)
         binding.bookCyclerview.adapter = adapter
-        binding.bookCyclerview.layoutManager = GridLayoutManager(context,2)
+        binding.bookCyclerview.layoutManager = StaggeredGridLayoutManager(2,StaggeredGridLayoutManager.VERTICAL)
 
         likeViewModel.likedItems.observe(viewLifecycleOwner) {
             it
             Timber.e("여기는 데이터가 오 ㅐ 안들어오까..;. $it")
-            // 좋아요를 누른 항목을 사용하여 UI를 업데이트하십시오.
-            // 예: RecyclerView 어댑터에 데이터를 전달하여 좋아요를 누른 항목을 표시하십시오.
             adapter.submitList(it)
 
             Timber.e("너가 범인? ${(it.toString())}")
