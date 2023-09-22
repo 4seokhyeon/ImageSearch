@@ -12,7 +12,8 @@ import com.example.R
 import com.example.databinding.ItemSearchBinding
 import timber.log.Timber
 
-class SearchAdapter(private val likeViewModel: LikeViewModel) : ListAdapter<Item, SearchAdapter.SearchHolder>(ItemDiffCallback()) {
+class SearchAdapter(private val likeViewModel: LikeViewModel) :
+    ListAdapter<Item, SearchAdapter.SearchHolder>(ItemDiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SearchHolder {
         val binding = ItemSearchBinding.inflate(LayoutInflater.from(parent.context), parent, false)
@@ -24,7 +25,8 @@ class SearchAdapter(private val likeViewModel: LikeViewModel) : ListAdapter<Item
         Timber.e("데이터 ${getItem(position)}")
     }
 
-    inner class SearchHolder(val binding: ItemSearchBinding) : RecyclerView.ViewHolder(binding.root) {
+    inner class SearchHolder(val binding: ItemSearchBinding) :
+        RecyclerView.ViewHolder(binding.root) {
         fun bind(item: Item) {
             binding.apply {
                 textListTitle.text = item.display_sitename
@@ -79,7 +81,6 @@ class SearchAdapter(private val likeViewModel: LikeViewModel) : ListAdapter<Item
             return oldItem == newItem
         }
     }
-
 
 
 }

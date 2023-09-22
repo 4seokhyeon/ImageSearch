@@ -8,16 +8,14 @@ import com.ImageSearch.model.Item
 import com.ImageSearch.model.SharedPreferencesUtil
 import timber.log.Timber
 
-class LikeViewModel:ViewModel() {
+class LikeViewModel : ViewModel() {
 
     private val _likedItems: MutableLiveData<MutableList<Item>> = MutableLiveData(mutableListOf())
-    val likedItems: LiveData<MutableList<Item>>
-        get() = _likedItems
+    val likedItems: LiveData<MutableList<Item>> = _likedItems
 
 
     private val _likedItemClicked: MutableLiveData<Item> = MutableLiveData()
-    val likedItemClicked: LiveData<Item>
-        get() = _likedItemClicked
+
 
     fun addToLikedItems(item: Item) {
         Timber.e("좋아요 데이터 변경 $item")
@@ -41,6 +39,7 @@ class LikeViewModel:ViewModel() {
         _likedItemClicked.value = item
         Timber.e("여기도 데이터 $item")
     }
+
     fun loadLikedItemsFromLocalStorage(context: Context) {
         val loadedItems = SharedPreferencesUtil.loadLikedItems(context)
         _likedItems.postValue(loadedItems.toMutableList())

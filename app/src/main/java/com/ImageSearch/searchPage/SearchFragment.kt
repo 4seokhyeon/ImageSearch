@@ -49,12 +49,6 @@ class SearchFragment : Fragment() {
                 saveLikedItems(items)
             }
         })
-  /*      val sharedPreferences = requireContext().getSharedPreferences("Prefernces",Context.MODE_PRIVATE)
-        val likedDateJson = sharedPreferences.getString("likeData","")
-        val gson = Gson()
-        val likedItemd:List<Item> = gson.fromJson(likedDateJson,object : TypeToken<List<Item>>() {}.type)
-        adapter.submitList(likedItemd)
-*/
 
         binding.searchBtn.setOnClickListener {
             val query = binding.dialogName.text.toString()

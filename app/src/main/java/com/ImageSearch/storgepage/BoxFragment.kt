@@ -40,10 +40,10 @@ class BoxFragment : Fragment() {
 
         adapter = BookAdapter(likeViewModel)
         binding.bookCyclerview.adapter = adapter
-        binding.bookCyclerview.layoutManager = StaggeredGridLayoutManager(2,StaggeredGridLayoutManager.VERTICAL)
+        binding.bookCyclerview.layoutManager =
+            StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
 
-        likeViewModel.likedItems.observe(viewLifecycleOwner) {
-                likedItems ->
+        likeViewModel.likedItems.observe(viewLifecycleOwner) { likedItems ->
 
             Timber.e("자징더;ㄴ가깉ㅇ,ㅁ ${saveLikedItems(likedItems)}")
             Timber.e("여기는 데이터가 오 ㅐ 안들어오까..;. $likedItems")
@@ -58,10 +58,12 @@ class BoxFragment : Fragment() {
 
         return binding.root
     }
+
     override fun onDestroy() {
         super.onDestroy()
         likeViewModel.saveLikedItemsToLocalStorage(requireContext())
     }
+
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
